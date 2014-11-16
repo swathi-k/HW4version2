@@ -105,6 +105,8 @@ public class SnakeView extends TileView {
      */
     private ArrayList<Coordinate> mSnakeTrail = new ArrayList<Coordinate>();
     private ArrayList<Coordinate> mAppleList = new ArrayList<Coordinate>();
+    
+    private Walls mwall;
 
     /**
      * Everyone needs a little randomness in their life
@@ -159,6 +161,7 @@ public class SnakeView extends TileView {
         loadTile(RED_STAR, r.getDrawable(R.drawable.redstar));
         loadTile(YELLOW_STAR, r.getDrawable(R.drawable.yellowstar));
         loadTile(GREEN_STAR, r.getDrawable(R.drawable.greenstar));
+        
 
     }
 
@@ -183,6 +186,8 @@ public class SnakeView extends TileView {
         	mMoveDelay = 500;
         if(mCurrentLevel == 2)
         	mMoveDelay = 400;
+        
+        mwall = new Walls(mXTileCount, mYTileCount);
         
         
     }
@@ -499,6 +504,7 @@ public class SnakeView extends TileView {
 
             if (now - mLastMove > mMoveDelay) {
                 clearTiles();
+                mwall.reset();
                 updateWalls();
                 updateSnake();
                 updateApples();
@@ -518,6 +524,8 @@ public class SnakeView extends TileView {
     	for (int x = 0; x < mXTileCount; x++) {
             setTile(GREEN_STAR, x, 0);
             setTile(GREEN_STAR, x, mYTileCount - 1);
+            mwall.addWall(x, 0);
+            mwall.addWall(x, mYTileCount - 1);
         }
 
     	//Cut out holes in vertical walls    	
@@ -528,22 +536,49 @@ public class SnakeView extends TileView {
         for (int y = 1; y < ytilecountmin; y++) {
             setTile(GREEN_STAR, 0, y);
             setTile(GREEN_STAR, mXTileCount - 1, y);
+            mwall.addWall(0, y);
+            mwall.addWall(mXTileCount - 1, y);
         }
         
         for (int y = ytilecountmax; y < mYTileCount - 1; y++) {
             setTile(GREEN_STAR, 0, y);
             setTile(GREEN_STAR, mXTileCount - 1, y);
+            mwall.addWall(0, y);
+            mwall.addWall(mXTileCount - 1, y);
         }
         
-        drawWallsLevel1();
-        
+        if(mCurrentLevel == 2)
+        	drawWallsLevel3();
+        else if(mCurrentLevel == 1)
+        	drawWallsLevel2();
+        else
+        	drawWallsLevel1();
     }
     
     private void drawWallsLevel1() {
     	//Draw vertical line down the middle
         for (int j = 5; j < mYTileCount - 4; j ++) {
         	setTile(GREEN_STAR, mXTileCount/2, j);
+        	mwall.addWall(mXTileCount/2, j);
         }
+    }
+    
+    private void drawWallsLevel2() {
+    	drawWallsLevel1();
+    	for(int i = mXTileCount/2; i < mXTileCount/2 + 6; i++) {
+    		setTile(GREEN_STAR, i, mYTileCount/2);
+    		mwall.addWall(i, mYTileCount/2);
+    	}
+    }
+    
+    private void drawWallsLevel3() {
+    	drawWallsLevel2();
+    	for(int i = mXTileCount/2 - 6; i < mXTileCount/2; i++) {
+    		setTile(GREEN_STAR, i, 5);
+    		mwall.addWall(i, 5);
+    		setTile(GREEN_STAR, i, mYTileCount - 5);
+    		mwall.addWall(i, mYTileCount - 5);
+    	}
     }
 
     /**
@@ -601,14 +636,14 @@ public class SnakeView extends TileView {
 
         // Collision detection
         // For now we have a 1-square wall around the entire arena
-        if ((newHead.x < 1) || (newHead.y < 1) || (newHead.x > mXTileCount - 2)
-                || (newHead.y > mYTileCount - 2)) {
-        	mLives--;
-            setMode(LOSE);
-            return;
-
-        }
-        
+//        if ((newHead.x < 1) || (newHead.y < 1) || (newHead.x > mXTileCount - 2)
+//                || (newHead.y > mYTileCount - 2)) {
+//        	mLives--;
+//            setMode(LOSE);
+//            return;
+//
+//        }
+//        
         checkWallsLevel1(newHead);
 
         // Look for collisions with itself
@@ -658,6 +693,16 @@ public class SnakeView extends TileView {
     
     private void checkWallsLevel1(Coordinate newHead) {
     	//Look for wall in the middle of the screen
+        if (mwall.getWall(newHead.x, newHead.y)) {
+        		mLives--;
+        		setMode(LOSE);
+        		return;
+        	}
+        
+    }
+
+    private void checkWallsLevel2(Coordinate newHead) {
+    	//Look for wall in the middle of the screen
         if (newHead.x == mXTileCount/2) {
         	if((newHead.y < (mYTileCount - 4)) && (newHead.y >= 5)) {
         		mLives--;
@@ -666,7 +711,7 @@ public class SnakeView extends TileView {
         	}
         }
     }
-
+    
     /**
      * Simple class containing two integer values and a comparison function. There's probably
      * something I should use instead, but this was quick and easy to build.
