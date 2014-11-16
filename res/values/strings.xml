@@ -16,9 +16,16 @@
 
 <resources>
   <string name="app_name">Snake</string>
-  <string name="mode_ready">Snake\nStart</string>
+  <string name="mode_ready">Start Game</string>
+  <string name="mode_lose">Game Over\nScore: %1$d \n \n
+      ReStart Game</string>
   <string name="mode_pause">Paused\nResume</string>
-  <string name="mode_lose">Game Over\nScore: %1$d \n</string>
   <string name="mode_winsame">Try This Level Again\nLives: %1$d \nStart</string>
   <string name="mode_win">Next Level\nLives: %1$d \nStart </string>
+  
+  
+  <string name="title"> Welcome to Snake Game</string>
+  <string name="HigestScore">0</string>
+  <string name="ScoreLevel"> HIGH SCORE </string>
+  <string name="start">Start</string>
 </resources>

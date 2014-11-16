@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><merge xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res/cs175.hw4.snakes">
 
   <cs175.hw4.snakes.BackgroundView
@@ -15,17 +13,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:tileSize="24dp" />
-
-  <TextView android:id="@+id/text"
+  
+   <TextView android:id="@+id/ScoreLevel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   android:paddingLeft="50dp"
+    android:paddingTop="25dp"
+    android:textColor="#000000"
+    android:textSize="24sp"
+    android:visibility="visible"
+    android:text="@string/ScoreLevel" />
+   
+   
+    <TextView android:id="@+id/HigestScore"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="250dp"
+    android:paddingTop="25dp"
+    android:textColor="#000000"
+    android:textSize="24sp"
+    android:visibility="visible"
+    android:text="@string/HigestScore" />
+    
+    <TextView android:id="@+id/text"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:gravity="center"
-    android:textColor="@color/text_violet"
+    android:textColor="#000000"
     android:textSize="24sp"
-    android:visibility="visible" />
-
-  <TextView android:id="@+id/lives"
+    android:visibility="visible"
+    android:text="@string/start" />
+      
+      
+ 
+      
+      
+ 
+  <RelativeLayout android:id="@+id/arrowContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone">
+    
+     <TextView android:id="@+id/lives"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="50dp"
@@ -51,11 +81,6 @@
     android:textColor="@color/text_violet"
     android:textSize="24sp"
     android:visibility="visible" />
-  
-  <RelativeLayout android:id="@+id/arrowContainer"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:visibility="gone">
     
     <ImageView
         android:id="@+id/imageLeft"
@@ -75,5 +100,7 @@
       android:src="@drawable/dpad_right" />
 
   </RelativeLayout>
+
+  
 
 </merge>
