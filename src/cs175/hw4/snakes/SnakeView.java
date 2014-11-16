@@ -95,8 +95,7 @@ public class SnakeView extends TileView {
     private View mArrowsView;
 
     /**
-     * mBackgroundView: Background View which shows 4 different colored triangles pressing which
-     * moves the snake
+     * mBackgroundView: Background View 
      */
     private View mBackgroundView;
 
@@ -399,6 +398,7 @@ public class SnakeView extends TileView {
         if (newMode == RUNNING && oldMode != RUNNING) {
             // hide the game instructions
             mStatusText.setVisibility(View.INVISIBLE);
+            mBackgroundView.setVisibility(View.INVISIBLE);
             update();
             // make the background and arrows visible as soon the snake starts moving
             mArrowsView.setVisibility(View.VISIBLE);
@@ -423,7 +423,9 @@ public class SnakeView extends TileView {
             if(mCurrentLevel <= 0) {
             	str = res.getString(R.string.mode_lose, mScore);
             }
-            	
+            mBackgroundView.setVisibility(View.VISIBLE);
+            mBackgroundView.bringToFront();
+            mStatusText.bringToFront();
         }
         //TODO modify WIN - show next level
         if (newMode == WIN) {
@@ -431,6 +433,7 @@ public class SnakeView extends TileView {
             str = res.getString(R.string.mode_win, mLives);
             mCurrentLevel++;
             mMode = LOSE;
+            
         }
 
         mStatusText.setText(str);

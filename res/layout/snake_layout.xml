@@ -3,6 +3,13 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res/cs175.hw4.snakes">
 
+  <cs175.hw4.snakes.BackgroundView
+    android:id="@+id/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+     />  
+    
   <cs175.hw4.snakes.SnakeView
     android:id="@+id/snake"
     android:layout_width="match_parent"
