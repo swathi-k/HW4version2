@@ -70,6 +70,7 @@ public class SnakeView extends TileView {
      * between snake movements. This will decrease as apples are captured.
      */
     private long mScore = 0;
+    private long mLives = 3;
     private long mMoveDelay = 600;
     /**
      * mLastMove: Tracks the absolute time when the snake last moved, and is used to determine if a
@@ -388,10 +389,16 @@ public class SnakeView extends TileView {
 
             str = res.getText(R.string.mode_ready);
         }
-        //TODO modify WIN - show next level
-        if (newMode == LOSE || newMode == WIN) {
+        //TODO modify WIN - show same level if lives exist
+        if (newMode == LOSE) {
             mArrowsView.setVisibility(View.GONE);
             str = res.getString(R.string.mode_lose, mScore);
+        }
+        //TODO modify WIN - show next level
+        if (newMode == WIN) {
+            mArrowsView.setVisibility(View.GONE);
+            str = res.getString(R.string.mode_lose, mScore);
+            
         }
 
         mStatusText.setText(str);
@@ -552,6 +559,7 @@ public class SnakeView extends TileView {
         // For now we have a 1-square wall around the entire arena
         if ((newHead.x < 1) || (newHead.y < 1) || (newHead.x > mXTileCount - 2)
                 || (newHead.y > mYTileCount - 2)) {
+        	mLives--;
             setMode(LOSE);
             return;
 
@@ -564,6 +572,7 @@ public class SnakeView extends TileView {
         for (int snakeindex = 0; snakeindex < snakelength; snakeindex++) {
             Coordinate c = mSnakeTrail.get(snakeindex);
             if (c.equals(newHead)) {
+            	mLives--;
                 setMode(LOSE);
                 return;
             }
@@ -607,6 +616,7 @@ public class SnakeView extends TileView {
     	//Look for wall in the middle of the screen
         if (newHead.x == mXTileCount/2) {
         	if((newHead.y < (mYTileCount - 4)) && (newHead.y >= 5)) {
+        		mLives--;
         		setMode(LOSE);
         		return;
         	}
