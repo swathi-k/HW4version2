@@ -93,6 +93,8 @@ containing a value of this type.
         public static final int mode_lose=0x7f050003;
         public static final int mode_pause=0x7f050002;
         public static final int mode_ready=0x7f050001;
+        public static final int mode_win=0x7f050005;
+        public static final int mode_winsame=0x7f050004;
     }
     public static final class styleable {
         /** Attributes that can be used with a BackgroundView.

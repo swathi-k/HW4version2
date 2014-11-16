@@ -19,4 +19,6 @@
   <string name="mode_ready">Snake\nPress Up To Play</string>
   <string name="mode_pause">Paused\nPress Up To Resume</string>
   <string name="mode_lose">Game Over\nScore: %1$d \nPress Up To Play</string>
+  <string name="mode_winsame">Try This Level Again\nLives: %1$d \nPress Up To Play</string>
+  <string name="mode_win">Next Level\nLives: %1$d \nPress Up To Play</string>
 </resources>

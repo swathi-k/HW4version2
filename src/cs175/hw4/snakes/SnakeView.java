@@ -71,6 +71,8 @@ public class SnakeView extends TileView {
      */
     private long mScore = 0;
     private long mLives = 3;
+    private int mCurrentLevel = 0;
+    private int maxLevels = 3;
     private long mMoveDelay = 600;
     /**
      * mLastMove: Tracks the absolute time when the snake last moved, and is used to determine if a
@@ -172,8 +174,13 @@ public class SnakeView extends TileView {
         mSnakeTrail.add(new Coordinate(1, midway));
         mSnakeTrail.add(new Coordinate(0, midway));
         mNextDirection = EAST;
-
+        Log.i("snakemoved level " + mCurrentLevel, "snakemoved level " + mCurrentLevel);
         mMoveDelay = 600;
+        if(mCurrentLevel == 1)
+        	mMoveDelay = 500;
+        if(mCurrentLevel == 2)
+        	mMoveDelay = 400;
+        
         mScore = 0;
     }
 
@@ -392,13 +399,18 @@ public class SnakeView extends TileView {
         //TODO modify WIN - show same level if lives exist
         if (newMode == LOSE) {
             mArrowsView.setVisibility(View.GONE);
-            str = res.getString(R.string.mode_lose, mScore);
+            str = res.getString(R.string.mode_winsame, mLives);
+            if(mCurrentLevel <= 0) {
+            	str = res.getString(R.string.mode_lose, mScore);
+            }
+            	
         }
         //TODO modify WIN - show next level
         if (newMode == WIN) {
             mArrowsView.setVisibility(View.GONE);
-            str = res.getString(R.string.mode_lose, mScore);
-            
+            str = res.getString(R.string.mode_win, mLives);
+            mCurrentLevel++;
+            mMode = LOSE;
         }
 
         mStatusText.setText(str);
