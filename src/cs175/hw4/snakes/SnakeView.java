@@ -84,6 +84,10 @@ public class SnakeView extends TileView {
      * mStatusText: Text shows to the user in some run states
      */
     private TextView mStatusText;
+    
+    private TextView mscoreText;
+    private TextView mliveText;
+    private TextView mlevelText;
 
     /**
      * mArrowsView: View which shows 4 arrows to signify 4 directions in which the snake can move
@@ -181,7 +185,7 @@ public class SnakeView extends TileView {
         if(mCurrentLevel == 2)
         	mMoveDelay = 400;
         
-        mScore = 0;
+        
     }
 
     /**
@@ -257,6 +261,19 @@ public class SnakeView extends TileView {
         mSnakeTrail = coordArrayToArrayList(icicle.getIntArray("mSnakeTrail"));
     }
     
+    
+    public void updateLabels() {
+    	
+    	mscoreText.setText("Sc: " + mScore);
+        mscoreText.setVisibility(View.VISIBLE);
+        
+        mliveText.setText("Liv: " + mLives);
+        mliveText.setVisibility(View.VISIBLE);
+        
+        mlevelText.setText("Lev: " + mCurrentLevel);
+        mlevelText.setVisibility(View.VISIBLE);
+    	
+    }
     
     public void moveSnake(int direction) {
 
@@ -360,7 +377,10 @@ public class SnakeView extends TileView {
      * 
      * @param newView
      */
-    public void setDependentViews(TextView msgView, View arrowView, View backgroundView) {
+    public void setDependentViews(TextView scoreView, TextView liveView, TextView levelView, TextView msgView, View arrowView, View backgroundView) {
+    	mscoreText = scoreView;
+    	mliveText = liveView;
+    	mlevelText = levelView;
         mStatusText = msgView;
         mArrowsView = arrowView;
         mBackgroundView = backgroundView;
@@ -415,6 +435,15 @@ public class SnakeView extends TileView {
 
         mStatusText.setText(str);
         mStatusText.setVisibility(View.VISIBLE);
+        
+        mscoreText.setText("Sc: " + mScore);
+        mscoreText.setVisibility(View.VISIBLE);
+        
+        mliveText.setText("Liv: " + mLives);
+        mliveText.setVisibility(View.VISIBLE);
+        
+        mlevelText.setText("Lev: " + mCurrentLevel);
+        mlevelText.setVisibility(View.VISIBLE);
     }
 
     /**

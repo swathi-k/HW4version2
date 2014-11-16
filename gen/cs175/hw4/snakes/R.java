@@ -81,6 +81,9 @@ containing a value of this type.
         public static final int imageLeft=0x7f060005;
         public static final int imageRight=0x7f060006;
         public static final int imageUp=0x7f060004;
+        public static final int level=0x7f060009;
+        public static final int lives=0x7f060008;
+        public static final int scores=0x7f06000a;
         public static final int snake=0x7f060001;
         public static final int text=0x7f060002;
     }

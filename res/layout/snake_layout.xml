@@ -10,7 +10,7 @@
     app:tileSize="24dp" />
 
   <TextView android:id="@+id/text"
-  android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:gravity="center"
@@ -18,6 +18,33 @@
     android:textSize="24sp"
     android:visibility="visible" />
 
+  <TextView android:id="@+id/lives"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="50dp"
+    android:paddingTop="25dp"
+    android:textColor="@color/text_violet"
+    android:textSize="24sp"
+    android:visibility="visible" />
+  
+  <TextView android:id="@+id/level"
+	android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="250dp"
+    android:paddingTop="25dp"
+    android:textColor="@color/text_violet"
+    android:textSize="24sp"
+    android:visibility="visible" />
+
+  <TextView android:id="@+id/scores"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="500dp"
+    android:paddingTop="25dp"
+    android:textColor="@color/text_violet"
+    android:textSize="24sp"
+    android:visibility="visible" />
+  
   <RelativeLayout android:id="@+id/arrowContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"

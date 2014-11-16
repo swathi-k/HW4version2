@@ -59,8 +59,13 @@ public class Snake extends Activity {
         setContentView(R.layout.snake_layout);
 
         mSnakeView = (SnakeView) findViewById(R.id.snake);
-        mSnakeView.setDependentViews((TextView) findViewById(R.id.text),
-                findViewById(R.id.arrowContainer), findViewById(R.id.background));
+        mSnakeView.setDependentViews(
+        		(TextView) findViewById(R.id.scores),
+        		(TextView) findViewById(R.id.lives),
+        		(TextView) findViewById(R.id.level),
+        		(TextView) findViewById(R.id.text),
+                findViewById(R.id.arrowContainer), 
+                findViewById(R.id.background));
 
         if (savedInstanceState == null) {
             // We were just launched -- set up a new game
@@ -90,6 +95,7 @@ public class Snake extends Activity {
 
                     // Direction is same as the quadrant which was clicked
                     mSnakeView.moveSnake(direction);
+                    mSnakeView.updateLabels();
 
                 } else {
                     // If the game is not running then on touching any part of the screen
