@@ -444,14 +444,17 @@ public class SnakeView extends TileView {
 			mBackgroundView.setVisibility(View.VISIBLE);
 			mBackgroundView.bringToFront();
 			mStatusText.bringToFront();
+			
 		}
 		
 		if (newMode == WIN) {
 			mArrowsView.setVisibility(View.GONE);
 			str = res.getString(R.string.mode_win, mLives);
 			mCurrentLevel++;
-			mMode = LOSE;
-
+			mBackgroundView.setVisibility(View.VISIBLE);
+			mBackgroundView.bringToFront();
+			mStatusText.bringToFront();
+			mMode = READY;
 		}
 		
 		if (newMode == GAMEOVER) {
