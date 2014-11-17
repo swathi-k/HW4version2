@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2007 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package cs175.hw4.snakes;
 
 import android.app.Activity;
@@ -28,13 +12,8 @@ import android.view.View.OnTouchListener;
 import android.widget.TextView;
 
 /**
- * Snake: a simple game that everyone can enjoy.
- * 
- * This is an implementation of the classic Game "Snake", in which you control a
- * serpent roaming around the garden looking for apples. Be careful, though,
- * because when you catch one, not only will you become longer, but you'll move
- * faster. Running into yourself or the walls will end the game.
- * 
+ * Snake: is a simple game. It has three level.Player need clear each level to
+ * move next level. Any player can get highest 4 point.
  */
 public class Snake extends Activity {
 	private SQLiteDatabase db;
@@ -71,7 +50,7 @@ public class Snake extends Activity {
 				(TextView) findViewById(R.id.HigestScore));
 
 		if (savedInstanceState == null) {
-			// We were just launched -- set up a new game
+			// set up a new game
 
 			mSnakeView.setMode(SnakeView.READY);
 
@@ -90,34 +69,33 @@ public class Snake extends Activity {
 			public boolean onTouch(View v, MotionEvent event) {
 				if (mSnakeView.getGameState() == SnakeView.RUNNING) {
 					// Normalize x,y between 0 and 1
-//					float x = event.getX() / v.getWidth();
-//					float y = event.getY() / v.getHeight();
+					// float x = event.getX() / v.getWidth();
+					// float y = event.getY() / v.getHeight();
 
 					// Direction will be [0,1,2,3] depending on quadrant
 					int direction = 0;
-//					direction = (x > y) ? 1 : 0;
-//					direction |= (x > 1 - y) ? 2 : 0;
-					
+					// direction = (x > y) ? 1 : 0;
+					// direction |= (x > 1 - y) ? 2 : 0;
+
 					float x = event.getX();
 					float y = event.getY();
-					
+
 					float vy = v.getHeight() / 2;
 					float vx = v.getWidth() / 2;
-//					if(y < vy)
-//					{
-						if(x < vx)
-							direction = 0;
-						else
-							direction = 3;
-//					}
-//					else
-//						direction = 1;
-					
-					
+					// if(y < vy)
+					// {
+					if (x < vx)
+						direction = 0;
+					else
+						direction = 3;
+					// }
+					// else
+					// direction = 1;
+
 					// Direction is same as the quadrant which was clicked
-					Log.i("snakemoved1 " + direction, "snakemoved1 " + direction);
+					Log.i("snakemoved1 " + direction, "snakemoved1 "
+							+ direction);
 					mSnakeView.moveSnake(direction);
-					
 
 					mSnakeView.updateLabels();
 
@@ -125,15 +103,19 @@ public class Snake extends Activity {
 					// If the game is not running then on touching any part of
 					// the screen
 					// we start the game by sending MOVE_UP signal to SnakeView
-					if(mSnakeView.getGameState() == SnakeView.GAMEOVER)
-					{
-						try { Thread.sleep(3000); Log.i("mscore Sleeping done", "mscore Sleeping done");}
-						catch (InterruptedException ex) { Log.i("mscore Sleeping","YourApplicationName.toString()"); }
-						
+					if (mSnakeView.getGameState() == SnakeView.GAMEOVER) {
+						try {
+							Thread.sleep(3000);
+							Log.i("mscore Sleeping done",
+									"mscore Sleeping done");
+						} catch (InterruptedException ex) {
+							Log.i("mscore Sleeping",
+									"YourApplicationName.toString()");
+						}
+
 						mSnakeView.setMode(SnakeView.READY);
-					}
-					else {
-					mSnakeView.moveSnake(MOVE_UP);
+					} else {
+						mSnakeView.moveSnake(MOVE_UP);
 					}
 				}
 				return false;

@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2007 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package cs175.hw4.snakes;
 
 import java.util.ArrayList;
@@ -32,7 +16,7 @@ import android.view.View;
 import android.widget.TextView;
 
 /**
- * SnakeView: implementation of a simple game of Snake
+ * SnakeView: implementation of Snake game
  */
 public class SnakeView extends TileView {
 	// private SQLiteDatabase db;
@@ -315,7 +299,8 @@ public class SnakeView extends TileView {
 
 		if (direction == Snake.MOVE_LEFT) {
 
-			Log.i("snakemoved1 left button pressed", "snakemoved1 left button pressed");
+			Log.i("snakemoved1 left button pressed",
+					"snakemoved1 left button pressed");
 			if (mDirection == NORTH) {
 				moveSnake1(WEST);
 				return;
@@ -331,7 +316,8 @@ public class SnakeView extends TileView {
 			}
 		} else {
 
-			Log.i("snakemoved1 right button pressed", "snakemoved1 right button pressed");
+			Log.i("snakemoved1 right button pressed",
+					"snakemoved1 right button pressed");
 			if (mDirection == NORTH) {
 				moveSnake1(EAST);
 				return;
@@ -443,9 +429,9 @@ public class SnakeView extends TileView {
 			mBackgroundView.setVisibility(View.VISIBLE);
 			mBackgroundView.bringToFront();
 			mStatusText.bringToFront();
-			
+
 		}
-		
+
 		if (newMode == WIN) {
 			mArrowsView.setVisibility(View.GONE);
 			str = res.getString(R.string.mode_win, mLives);
@@ -455,7 +441,7 @@ public class SnakeView extends TileView {
 			mStatusText.bringToFront();
 			mMode = READY;
 		}
-		
+
 		if (newMode == GAMEOVER) {
 			Log.i("current mscore when GAMEOVER ", "mscore GAMEOVER " + mScore);
 			mCurrentLevel = 0;
@@ -465,17 +451,22 @@ public class SnakeView extends TileView {
 			str = res.getString(R.string.mode_lose, mScore);
 			mArrowsView.setVisibility(View.GONE);
 			mBackgroundView.setVisibility(View.VISIBLE);
-			Log.i("current mscore when GAMEOVER ", "mscore GAMEOVER " + "Highest Score:" + Integer.valueOf(getHighestScoreFromDB()));
-			mHighScoreView.setText("Highest Score:" + Integer.valueOf(getHighestScoreFromDB()));
-			//mMode = READY;
+			Log.i("current mscore when GAMEOVER ",
+					"mscore GAMEOVER " + "Highest Score:"
+							+ Integer.valueOf(getHighestScoreFromDB()));
+			mHighScoreView.setText("Highest Score:"
+					+ Integer.valueOf(getHighestScoreFromDB()));
+			// mMode = READY;
 			mStatusText.setText(str);
 			mStatusText.setVisibility(View.VISIBLE);
 			mBackgroundView.setVisibility(View.VISIBLE);
 			mBackgroundView.bringToFront();
 			mStatusText.bringToFront();
 			mSnakeTrail.clear();
-//			try { Thread.sleep(3000); Log.i("mscore Sleeping done", "mscore Sleeping done");}
-//			catch (InterruptedException ex) { Log.i("","YourApplicationName.toString()"); }
+			// try { Thread.sleep(3000); Log.i("mscore Sleeping done",
+			// "mscore Sleeping done");}
+			// catch (InterruptedException ex) {
+			// Log.i("","YourApplicationName.toString()"); }
 			return;
 
 		}
@@ -728,11 +719,10 @@ public class SnakeView extends TileView {
 				mScore++;
 
 				Log.i("snakemoved win!", "snakemoved win!");
-				
-				if(mLives == 0 || mCurrentLevel == 3) {
+
+				if (mLives == 0 || mCurrentLevel == 3) {
 					setMode(GAMEOVER);
-				}
-				else
+				} else
 					setMode(WIN);
 				return;
 			}
@@ -757,10 +747,9 @@ public class SnakeView extends TileView {
 			Coordinate c = mSnakeTrail.get(snakeindex);
 			if (c.equals(newHead)) {
 				mLives--;
-				if(mLives == 0 || mCurrentLevel == 3) {
+				if (mLives == 0 || mCurrentLevel == 3) {
 					setMode(GAMEOVER);
-				}
-				else
+				} else
 					setMode(LOSE);
 				return;
 			}
@@ -804,10 +793,9 @@ public class SnakeView extends TileView {
 		// Look for wall in the middle of the screen
 		if (mwall.getWall(newHead.x, newHead.y)) {
 			mLives--;
-			if(mLives == 0 || mCurrentLevel == 3) {
+			if (mLives == 0 || mCurrentLevel == 3) {
 				setMode(GAMEOVER);
-			}
-			else
+			} else
 				setMode(LOSE);
 			return;
 		}
@@ -819,10 +807,10 @@ public class SnakeView extends TileView {
 		if (newHead.x == mXTileCount / 2) {
 			if ((newHead.y < (mYTileCount - 4)) && (newHead.y >= 5)) {
 				mLives--;
-				if(mLives == 0 || mCurrentLevel == 3) {
+				if (mLives == 0 || mCurrentLevel == 3) {
 					setMode(GAMEOVER);
 				}
-					setMode(LOSE);
+				setMode(LOSE);
 				return;
 			}
 		}
