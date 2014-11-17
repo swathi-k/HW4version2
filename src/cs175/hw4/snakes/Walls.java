@@ -22,6 +22,9 @@ public class Walls {
 		if (x < 0 || y < 0)
 			return true;
 
+		if(x > 0)
+			return true;
+		
 		if (mywallArray[x][y][0] == 1)
 			return true;
 		else
