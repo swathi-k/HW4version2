@@ -22,7 +22,7 @@ public class Walls {
 		if (x < 0 || y < 0)
 			return true;
 
-		if(x > mywallArray.length || y > mywallArray[0].length)
+		if(x >= mywallArray.length || y >= mywallArray[0].length)
 			return true;
 		
 		if (mywallArray[x][y][0] == 1)
