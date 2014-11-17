@@ -49,6 +49,7 @@ public class SnakeView extends TileView {
 	public static final int RUNNING = 2;
 	public static final int LOSE = 3;
 	public static final int WIN = 4;
+	public static final int GAMEOVER = 5;
 
 	/**
 	 * Current direction the snake is headed.
@@ -185,8 +186,6 @@ public class SnakeView extends TileView {
 		mSnakeTrail.add(new Coordinate(1, midway));
 		mSnakeTrail.add(new Coordinate(0, midway));
 		mNextDirection = EAST;
-		Log.i("snakemoved level " + mCurrentLevel, "snakemoved level "
-				+ mCurrentLevel);
 		mMoveDelay = 600;
 		if (mCurrentLevel == 1)
 			mMoveDelay = 500;
@@ -316,6 +315,7 @@ public class SnakeView extends TileView {
 
 		if (direction == Snake.MOVE_LEFT) {
 
+			Log.i("snakemoved1 left button pressed", "snakemoved1 left button pressed");
 			if (mDirection == NORTH) {
 				moveSnake1(WEST);
 				return;
@@ -331,6 +331,7 @@ public class SnakeView extends TileView {
 			}
 		} else {
 
+			Log.i("snakemoved1 right button pressed", "snakemoved1 right button pressed");
 			if (mDirection == NORTH) {
 				moveSnake1(EAST);
 				return;
@@ -444,13 +445,20 @@ public class SnakeView extends TileView {
 			mBackgroundView.bringToFront();
 			mStatusText.bringToFront();
 		}
-		// TODO modify WIN - show next level
+		
 		if (newMode == WIN) {
 			mArrowsView.setVisibility(View.GONE);
 			str = res.getString(R.string.mode_win, mLives);
 			mCurrentLevel++;
 			mMode = LOSE;
 
+		}
+		
+		if (newMode == GAMEOVER) {
+			mCurrentLevel = 0;
+			mLives = 3;
+			setHighestScore(mScore);
+			mScore = 0;
 		}
 
 		mStatusText.setText(str);

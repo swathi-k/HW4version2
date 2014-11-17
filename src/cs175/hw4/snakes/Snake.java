@@ -90,16 +90,35 @@ public class Snake extends Activity {
 			public boolean onTouch(View v, MotionEvent event) {
 				if (mSnakeView.getGameState() == SnakeView.RUNNING) {
 					// Normalize x,y between 0 and 1
-					float x = event.getX() / v.getWidth();
-					float y = event.getY() / v.getHeight();
+//					float x = event.getX() / v.getWidth();
+//					float y = event.getY() / v.getHeight();
 
 					// Direction will be [0,1,2,3] depending on quadrant
 					int direction = 0;
-					direction = (x > y) ? 1 : 0;
-					direction |= (x > 1 - y) ? 2 : 0;
-
+//					direction = (x > y) ? 1 : 0;
+//					direction |= (x > 1 - y) ? 2 : 0;
+					
+					float x = event.getX();
+					float y = event.getY();
+					
+					float vy = v.getHeight() / 2;
+					float vx = v.getWidth() / 2;
+//					if(y < vy)
+//					{
+						if(x < vx)
+							direction = 0;
+						else
+							direction = 3;
+//					}
+//					else
+//						direction = 1;
+					
+					
 					// Direction is same as the quadrant which was clicked
+					Log.i("snakemoved1 " + direction, "snakemoved1 " + direction);
 					mSnakeView.moveSnake(direction);
+					
+
 					mSnakeView.updateLabels();
 
 				} else {

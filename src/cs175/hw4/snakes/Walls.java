@@ -12,7 +12,6 @@ public class Walls {
 	}
 	
 	public boolean addWall(int x, int y) {
-		Log.i("snakemoved " + x + " y is " + y, "snakemoved " + x + " y is " + y);
 		mywallArray[x][y][0] = 1;
 		return true;
 	}
@@ -27,7 +26,6 @@ public class Walls {
 	public void reset() {
 		for(int i = 0; i < mywallArray.length; i++) {
 			for(int j = 0; j < mywallArray[i].length; j++) {
-				Log.i("snakemoved " + i + " j is " + j, "snakemoved " + i + " j is " + j);
 				mywallArray[i][j][0] = 0;
 			}
 		}
