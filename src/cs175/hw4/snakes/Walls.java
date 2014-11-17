@@ -1,7 +1,7 @@
 package cs175.hw4.snakes;
 
 /**
- * Walls class keep track of walls when snake is moving.
+ * Walls class keep track of walls when sanke is moving
  * 
  * **/
 public class Walls {
