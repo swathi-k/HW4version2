@@ -467,20 +467,16 @@ public class SnakeView extends TileView {
 			mBackgroundView.setVisibility(View.VISIBLE);
 			Log.i("current mscore when GAMEOVER ", "mscore GAMEOVER " + "Highest Score:" + Integer.valueOf(getHighestScoreFromDB()));
 			mHighScoreView.setText("Highest Score:" + Integer.valueOf(getHighestScoreFromDB()));
-			mMode = READY;
+			//mMode = READY;
 			mStatusText.setText(str);
 			mStatusText.setVisibility(View.VISIBLE);
 			mBackgroundView.setVisibility(View.VISIBLE);
 			mBackgroundView.bringToFront();
 			mStatusText.bringToFront();
 			
-			try { Thread.sleep(3000); Log.i("mscore Sleeping done", "mscore Sleeping done");}
-			catch (InterruptedException ex) { Log.i("","YourApplicationName.toString()"); }
+//			try { Thread.sleep(3000); Log.i("mscore Sleeping done", "mscore Sleeping done");}
+//			catch (InterruptedException ex) { Log.i("","YourApplicationName.toString()"); }
 			return;
-			//mHighScoreView.bringToFront();
-//			str = res.getText(R.string.mode_ready);
-//			mStatusText.setText(str);
-//			mStatusText.setVisibility(View.VISIBLE);
 
 		}
 
@@ -733,8 +729,9 @@ public class SnakeView extends TileView {
 
 				Log.i("snakemoved win!", "snakemoved win!");
 				
-				if(mLives == 0 || mCurrentLevel == 3)
+				if(mLives == 0 || mCurrentLevel == 3) {
 					setMode(GAMEOVER);
+				}
 				else
 					setMode(WIN);
 				return;
@@ -760,8 +757,9 @@ public class SnakeView extends TileView {
 			Coordinate c = mSnakeTrail.get(snakeindex);
 			if (c.equals(newHead)) {
 				mLives--;
-				if(mLives == 0)
+				if(mLives == 0 || mCurrentLevel == 3) {
 					setMode(GAMEOVER);
+				}
 				else
 					setMode(LOSE);
 				return;
@@ -806,8 +804,9 @@ public class SnakeView extends TileView {
 		// Look for wall in the middle of the screen
 		if (mwall.getWall(newHead.x, newHead.y)) {
 			mLives--;
-			if(mLives == 0)
+			if(mLives == 0 || mCurrentLevel == 3) {
 				setMode(GAMEOVER);
+			}
 			else
 				setMode(LOSE);
 			return;
@@ -820,9 +819,9 @@ public class SnakeView extends TileView {
 		if (newHead.x == mXTileCount / 2) {
 			if ((newHead.y < (mYTileCount - 4)) && (newHead.y >= 5)) {
 				mLives--;
-				if(mLives == 0)
+				if(mLives == 0 || mCurrentLevel == 3) {
 					setMode(GAMEOVER);
-				else
+				}
 					setMode(LOSE);
 				return;
 			}

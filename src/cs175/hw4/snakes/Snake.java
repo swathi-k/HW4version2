@@ -125,6 +125,14 @@ public class Snake extends Activity {
 					// If the game is not running then on touching any part of
 					// the screen
 					// we start the game by sending MOVE_UP signal to SnakeView
+					if(mSnakeView.getGameState() == SnakeView.GAMEOVER)
+					{
+						try { Thread.sleep(3000); Log.i("mscore Sleeping done", "mscore Sleeping done");}
+						catch (InterruptedException ex) { Log.i("mscore Sleeping","YourApplicationName.toString()"); }
+						
+						mSnakeView.setMode(SnakeView.READY);
+					}
+					
 					mSnakeView.moveSnake(MOVE_UP);
 				}
 				return false;
@@ -199,19 +207,4 @@ public class Snake extends Activity {
 
 	}
 
-	/*
-	 * int score; String result; TextView displayScore = (TextView)
-	 * findViewById(R.id.HigestScore); TextView displayStart = (TextView)
-	 * findViewById(R.id.text); // load highScore, speed from database //MyDb
-	 * snake = new MyDb(getContext()); db = snake.getReadableDatabase(); Cursor
-	 * cursor = db.query("hw4", null, null, null, null, null, null); if
-	 * (cursor.moveToNext()) { score =
-	 * cursor.getInt(cursor.getColumnIndex("HIGH_SCORE"));
-	 * Log.e(" My current score is :", " " + score); result =
-	 * Integer.toString(score); Log.e("result is :", " " + result);
-	 * displayScore.setText(Integer.toString(score)); } cursor.close();
-	 * 
-	 * 
-	 * }
-	 */
 }
