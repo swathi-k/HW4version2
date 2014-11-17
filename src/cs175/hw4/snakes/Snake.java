@@ -132,8 +132,9 @@ public class Snake extends Activity {
 						
 						mSnakeView.setMode(SnakeView.READY);
 					}
-					
+					else {
 					mSnakeView.moveSnake(MOVE_UP);
+					}
 				}
 				return false;
 			}

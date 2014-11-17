@@ -433,7 +433,7 @@ public class SnakeView extends TileView {
 		if (newMode == LOSE) {
 			mArrowsView.setVisibility(View.GONE);
 			Log.i("current mscore when lose ", " mscore LOSE " + mScore);
-
+			mSnakeTrail.clear();
 			str = res.getString(R.string.mode_winsame, mLives);
 			if (mCurrentLevel < 0) {
 
@@ -473,7 +473,7 @@ public class SnakeView extends TileView {
 			mBackgroundView.setVisibility(View.VISIBLE);
 			mBackgroundView.bringToFront();
 			mStatusText.bringToFront();
-			
+			mSnakeTrail.clear();
 //			try { Thread.sleep(3000); Log.i("mscore Sleeping done", "mscore Sleeping done");}
 //			catch (InterruptedException ex) { Log.i("","YourApplicationName.toString()"); }
 			return;
