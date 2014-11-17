@@ -13,6 +13,16 @@ public class Walls {
 		reset();
 	}
 
+	public int getXMax() {
+
+		return mywallArray.length;
+
+	}
+
+	public int getYMax() {
+		return mywallArray[0].length;
+	}
+
 	public boolean addWall(int x, int y) {
 		mywallArray[x][y][0] = 1;
 		return true;

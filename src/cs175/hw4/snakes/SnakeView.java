@@ -462,6 +462,7 @@ public class SnakeView extends TileView {
 			mBackgroundView.setVisibility(View.VISIBLE);
 			mBackgroundView.bringToFront();
 			mStatusText.bringToFront();
+			mHighScoreView.bringToFront();
 			mSnakeTrail.clear();
 			// try { Thread.sleep(3000); Log.i("mscore Sleeping done",
 			// "mscore Sleeping done");}
@@ -792,7 +793,9 @@ public class SnakeView extends TileView {
 	private void checkWallsLevel1(Coordinate newHead) {
 		// Look for wall in the middle of the screen
 		if (mwall.getWall(newHead.x, newHead.y)) {
-			mLives--;
+			if (newHead.x < mwall.getXMax() && newHead.y < mwall.getYMax()) {
+				mLives--;
+			}
 			if (mLives == 0 || mCurrentLevel == 3) {
 				setMode(GAMEOVER);
 			} else
