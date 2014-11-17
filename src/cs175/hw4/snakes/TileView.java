@@ -139,6 +139,9 @@ public class TileView extends View {
      * @param y
      */
     public void setTile(int tileindex, int x, int y) {
+    	if(x < 0 || y < 0)
+    		return;
+    	
         mTileGrid[x][y] = tileindex;
     }
 

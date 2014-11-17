@@ -17,6 +17,9 @@ public class Walls {
 	}
 	
 	public boolean getWall(int x, int y) {
+		if(x < 0 || y < 0)
+			return true;
+		
 		if(mywallArray[x][y][0] == 1)
 			return true;
 		else
