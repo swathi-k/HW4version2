@@ -1,7 +1,7 @@
 package cs175.hw4.snakes;
 
 /**
- * Walls class create additional level for snake game map.
+ * Walls class keep track of walls when snake is moving.
  * 
  * **/
 public class Walls {
@@ -22,9 +22,9 @@ public class Walls {
 		if (x < 0 || y < 0)
 			return true;
 
-		if(x > mywallArray.length || y > mywallArray[0].length)
+		if (x >= mywallArray.length || y >= mywallArray[0].length)
 			return true;
-		
+
 		if (mywallArray[x][y][0] == 1)
 			return true;
 		else

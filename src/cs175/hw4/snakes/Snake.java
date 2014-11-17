@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 /**
  * Snake: is a simple game. It has three level.Player need clear each level to
- * move next level. Any player can get highest 4 point.
+ * move next level. Any player can get highest 3 points.
  */
 public class Snake extends Activity {
 	private SQLiteDatabase db;
