@@ -297,6 +297,7 @@ public class SnakeView extends TileView {
 			return;
 		}
 
+		
 		if (direction == Snake.MOVE_LEFT) {
 
 			Log.i("snakemoved1 left button pressed",
@@ -592,10 +593,11 @@ public class SnakeView extends TileView {
 
 			if (now - mLastMove > mMoveDelay) {
 				clearTiles();
-				mwall.reset();
+				if(mwall != null)
+					mwall.reset();
 				updateWalls();
 				updateSnake();
-				updateApples();
+				updatesnak();
 				mLastMove = now;
 			}
 			mRedrawHandler.sleep(mMoveDelay);
@@ -617,22 +619,17 @@ public class SnakeView extends TileView {
 		}
 
 		// Cut out holes in vertical walls
-		int ytilecountmin = mYTileCount / 2 - 2;
-		int ytilecountmax = mYTileCount / 2 + 2;
+		int ytilecountmin = mYTileCount / 2 ;
 
 		// Draw vertical walls in the border
-		for (int y = 1; y < ytilecountmin; y++) {
+		for (int y = 1; y < mYTileCount - 1; y++) {
+			
+			if(y != ytilecountmin) {
 			setTile(GREEN_STAR, 0, y);
 			setTile(GREEN_STAR, mXTileCount - 1, y);
 			mwall.addWall(0, y);
 			mwall.addWall(mXTileCount - 1, y);
-		}
-
-		for (int y = ytilecountmax; y < mYTileCount - 1; y++) {
-			setTile(GREEN_STAR, 0, y);
-			setTile(GREEN_STAR, mXTileCount - 1, y);
-			mwall.addWall(0, y);
-			mwall.addWall(mXTileCount - 1, y);
+			}
 		}
 
 		if (mCurrentLevel == 2)
@@ -670,9 +667,9 @@ public class SnakeView extends TileView {
 	}
 
 	/**
-	 * Draws some apples.
+	 * Draws some snake.
 	 */
-	private void updateApples() {
+	private void updatesnak() {
 		for (Coordinate c : mAppleList) {
 			setTile(YELLOW_STAR, c.x, c.y);
 		}
@@ -713,9 +710,8 @@ public class SnakeView extends TileView {
 		}
 
 		// Look for win hole
-		if (newHead.x > mXTileCount - 2) {
-			if ((newHead.y < ((mYTileCount / 2) + 2))
-					&& (newHead.y > ((mYTileCount / 2) - 2))) {
+		if (newHead.x == mXTileCount ) {
+			if (newHead.y == (mYTileCount / 2) ){
 
 				mScore++;
 
@@ -741,7 +737,8 @@ public class SnakeView extends TileView {
 		// }
 		//
 		checkWallsLevel1(newHead);
-
+		growSnake = true;
+		
 		// Look for collisions with itself
 		int snakelength = mSnakeTrail.size();
 		for (int snakeindex = 0; snakeindex < snakelength; snakeindex++) {
