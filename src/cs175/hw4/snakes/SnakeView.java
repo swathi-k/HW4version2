@@ -161,7 +161,7 @@ public class SnakeView extends TileView {
 
 		// For now we're just going to load up a short default eastbound snake
 		// that's just turned north
-		int midway = (mYTileCount / 2) - 1;
+		int midway = (mYTileCount / 2);
 
 		mSnakeTrail.add(new Coordinate(5, midway));
 		mSnakeTrail.add(new Coordinate(4, midway));
@@ -677,7 +677,7 @@ public class SnakeView extends TileView {
 
 	/**
 	 * Figure out which way the snake is going, see if he's run into anything
-	 * (the walls, himself, or an apple). If he's not going to die, we then add
+	 * (the walls or himself). If he's not going to die, we then add
 	 * to the front and subtract from the rear in order to simulate motion. If
 	 * we want to grow him, we don't subtract from the rear.
 	 */
@@ -753,7 +753,7 @@ public class SnakeView extends TileView {
 			}
 		}
 
-		// Look for apples
+		// Look for restofSnake
 		int applecount = mAppleList.size();
 		for (int appleindex = 0; appleindex < applecount; appleindex++) {
 			Coordinate c = mAppleList.get(appleindex);
