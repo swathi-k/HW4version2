@@ -5,5 +5,5 @@
   <color name="muted_yellow">#ff404000</color>
   <color name="muted_blue">#ff100050</color>
   <color name="muted_green">#ff004000</color>
-  <color name="text_violet">#ff8888ff</color>
+  <color name="text_violet">#ffffffff</color>
   </resources>
