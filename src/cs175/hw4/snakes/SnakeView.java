@@ -53,9 +53,9 @@ public class SnakeView extends TileView {
 	private static final int GREEN_STAR = 3;
 
 	/**
-	 * mScore: Used to track the number of apples captured mMoveDelay: number of
-	 * milliseconds between snake movements. This will decrease as apples are
-	 * captured.
+	 * mScore: Used to track the number of levels cleared mMoveDelay: number of
+	 * milliseconds between snake movements. This will increase as levels are
+	 * cleared.
 	 */
 	private long mScore = 0;
 	private long mLives = 3;
@@ -90,10 +90,10 @@ public class SnakeView extends TileView {
 
 	/**
 	 * mSnakeTrail: A list of Coordinates that make up the snake's body
-	 * mAppleList: The secret location of the juicy apples the snake craves.
+	 * mAList: The location of the snake
 	 */
 	private ArrayList<Coordinate> mSnakeTrail = new ArrayList<Coordinate>();
-	private ArrayList<Coordinate> mAppleList = new ArrayList<Coordinate>();
+	private ArrayList<Coordinate> mAList = new ArrayList<Coordinate>();
 
 	private Walls mwall;
 
@@ -157,7 +157,7 @@ public class SnakeView extends TileView {
 
 	private void initNewGame() {
 		mSnakeTrail.clear();
-		mAppleList.clear();
+		mAList.clear();
 
 		// For now we're just going to load up a short default eastbound snake
 		// that's just turned north
@@ -210,7 +210,7 @@ public class SnakeView extends TileView {
 	public Bundle saveState() {
 		Bundle map = new Bundle();
 
-		map.putIntArray("mAppleList", coordArrayListToArray(mAppleList));
+		map.putIntArray("mAList", coordArrayListToArray(mAList));
 		map.putInt("mDirection", Integer.valueOf(mDirection));
 		map.putInt("mNextDirection", Integer.valueOf(mNextDirection));
 		map.putLong("mMoveDelay", Long.valueOf(mMoveDelay));
@@ -248,7 +248,7 @@ public class SnakeView extends TileView {
 	public void restoreState(Bundle icicle) {
 		setMode(PAUSE);
 
-		mAppleList = coordArrayToArrayList(icicle.getIntArray("mAppleList"));
+		mAList = coordArrayToArrayList(icicle.getIntArray("mAppleList"));
 		mDirection = icicle.getInt("mDirection");
 		mNextDirection = icicle.getInt("mNextDirection");
 		mMoveDelay = icicle.getLong("mMoveDelay");
@@ -558,7 +558,7 @@ public class SnakeView extends TileView {
 		Coordinate newCoord = null;
 		boolean found = false;
 		while (!found) {
-			// Choose a new location for our apple
+			// Choose a new location
 			int newX = 1 + RNG.nextInt(mXTileCount - 2);
 			int newY = 1 + RNG.nextInt(mYTileCount - 2);
 			newCoord = new Coordinate(newX, newY);
@@ -571,15 +571,13 @@ public class SnakeView extends TileView {
 					collision = true;
 				}
 			}
-			// if we're here and there's been no collision, then we have
-			// a good location for an apple. Otherwise, we'll circle back
-			// and try again
+			// if we're here and there's been no collision
 			found = !collision;
 		}
 		if (newCoord == null) {
 			Log.e(TAG, "Somehow ended up with a null newCoord!");
 		}
-		mAppleList.add(newCoord);
+		mAList.add(newCoord);
 	}
 
 	/**
@@ -670,7 +668,7 @@ public class SnakeView extends TileView {
 	 * Draws some snake.
 	 */
 	private void updatesnak() {
-		for (Coordinate c : mAppleList) {
+		for (Coordinate c : mAList) {
 			setTile(YELLOW_STAR, c.x, c.y);
 		}
 	}
@@ -754,11 +752,11 @@ public class SnakeView extends TileView {
 		}
 
 		// Look for restofSnake
-		int applecount = mAppleList.size();
-		for (int appleindex = 0; appleindex < applecount; appleindex++) {
-			Coordinate c = mAppleList.get(appleindex);
+		int acount = mAList.size();
+		for (int aindex = 0; aindex < acount; aindex++) {
+			Coordinate c = mAList.get(aindex);
 			if (c.equals(newHead)) {
-				mAppleList.remove(c);
+				mAList.remove(c);
 				addRandomApple();
 
 				mScore++;
